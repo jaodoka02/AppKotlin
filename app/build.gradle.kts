@@ -1,14 +1,15 @@
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
+    kotlin("kapt")
 }
 
 android {
-    namespace = "com.example.projeto_kotlin"
+    namespace = "com.example.kotlinprojeto"
     compileSdk = 34
 
     defaultConfig {
-        applicationId = "com.example.projeto_kotlin"
+        applicationId = "com.example.kotlinprojeto"
         minSdk = 24
         targetSdk = 34
         versionCode = 1
@@ -33,16 +34,36 @@ android {
     kotlinOptions {
         jvmTarget = "1.8"
     }
+
+    buildFeatures {
+        viewBinding = true
+    }
 }
 
 dependencies {
-
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
     implementation(libs.material)
     implementation(libs.androidx.activity)
     implementation(libs.androidx.constraintlayout)
+    implementation(libs.firebase.crashlytics.buildtools)
+
+    // Dependências para o Room Database
+    implementation("androidx.room:room-runtime:2.5.0")
+    kapt("androidx.room:room-compiler:2.5.0")
+
+    // Dependências para Navigation Component
+    implementation("androidx.navigation:navigation-fragment-ktx:2.5.0")
+    implementation("androidx.navigation:navigation-ui-ktx:2.5.0")
+
+    // Dependência para Lifecycle (opcional, se precisar)
+    implementation("androidx.lifecycle:lifecycle-extensions:2.2.0")
+
+    implementation("com.google.code.gson:gson:2.8.8")
+
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
+
+    implementation(kotlin("script-runtime"))
 }
